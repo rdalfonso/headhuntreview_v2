@@ -41,6 +41,6 @@ jobs:
     - deploy:
         name: Push Application Docker Image
         command: |
-          if [ "$ {CIRCLE_BRANCH}" == "master" ]; then
+          if [ "${CIRCLE_BRANCH}" == "master" ]; then
             $DOCKER_HUB_TRIGGER
           fi
