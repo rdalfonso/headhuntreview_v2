@@ -1,0 +1,73 @@
+<app-nav></app-nav>
+<div class='panel panel-primary'  *ngIf='recruiter'>
+    <div class='panel-heading'>
+      Add Review: {{ recruiter.name }} ({{ recruiter.title }})
+    </div>
+    <div class="add-blurb">
+      Please submit a new review for {{ recruiter.name }}.
+    </div>
+    <div>
+      <form #form="ngForm" (submit)="submitForm(form)" novalidate>
+        <table class='table' border="0" width="750px">
+          <tbody>
+            <tr class="form-group">
+             <td width="100px"><label>Rating</label></td>
+             <td>
+               <app-rating [rating]='model.stars'
+                  [itemId]='recruiter.uniqueId'
+                  [itemStyle]='1'
+                  (ratingClick)='ratingComponetClick($event)'>
+               </app-rating>
+              </td>
+            </tr>
+           <tr class="form-group">
+             <td width="120px"><label class="control-label">Review Flags</label></td>
+             <td width="220px">
+               <div>
+                 <input class="form-textbox" #isTooAggressive="ngModel" type="checkbox" name="isTooAggressive" [(ngModel)]="model.isTooAggressive">
+                 <span class="control-label">Recruiter was too aggressive  with communication (email, texts, phone calls)</span>
+               </div>
+                <div>
+                  <input #isDishonestJob="ngModel" type="checkbox" name="isDishonestJob" [(ngModel)]="model.isDishonestJob">
+                  <span class="control-label">Recruiter was dishonest about job description and/or salary.</span>
+               </div>
+               <div>
+                 <input #isPersonalInfo="ngModel" type="checkbox" name="isPersonalInfo" [(ngModel)]="model.isPersonalInfo">
+                 <span class="control-label">Recruiter just wanted my personal information.</span>
+              </div>
+              <div>
+                <input #isFakeProfile="ngModel" type="checkbox" name="isFakeProfile" [(ngModel)]="model.isFakeProfile">
+                <span class="control-label">Recruiter may be fake profile.</span>
+             </div>
+             </td>
+            </tr>
+            <tr class="form-group" [class.has-error]="title.invalid && title.touched">
+              <td width="150px"><label class="control-label">Review Title</label></td>
+              <td width="600px"><input maxlength="50" #title="ngModel" type="text" name="title" [(ngModel)]="model.title"></td>
+             <td>
+               <span *ngIf="title.invalid && title.touched" class="alert alert-danger">Review Title is required.</span>
+            </td>
+           </tr>
+            <tr class="form-group" [class.has-error]="body.invalid && body.touched">
+              <td><label class="control-label">Review Body</label></td>
+              <td>
+              <textarea cols="40" rows="10" #body="ngModel" type="text" name="body" [(ngModel)]="model.body">
+                {{model.body}}
+              </textarea>
+            </td>
+             <td><span *ngIf="body.invalid && body.touched" class="alert alert-danger">Review Body is required.</span></td>
+           </tr>
+           <tr class="form-group">
+            <td colspan="2"><b>Note:</b> all reviews will be moderated</td>
+           </tr>
+           <tr class="form-group">
+            <td colspan="2">
+              <button type="reset" class="btn btn-default" (click)='onBack()'>Cancel</button>
+              <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Submit</button>
+            </td>
+          </tr>
+          </tbody>
+      </table>
+    </form>
+  </div>
+</div>

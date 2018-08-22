@@ -1,0 +1,47 @@
+<app-nav></app-nav>
+<div class='panel panel-primary' *ngIf='review'>
+    <div class='panel-heading'>{{'Review Detail: ' + review.title}}</div>
+    <div class='panel-body'>
+
+      <div class="row hhr-item">
+        <div class="col-md-2">Rating </div>
+        <div class="col-md-6"><app-rating [rating]='review.stars' [itemId]='0'></app-rating></div>
+      </div>
+      <div class="row hhr-item" *ngIf="review.isTooAggressive">
+        <div class="col-md-2"><img src="./assets/images/red-flag.jpg" width="30" height="30"/></div>
+        <div class="col-md-6">Recruiter was too aggressive  with communication (email, texts, phone calls)</div>
+      </div>
+      <div class="row hhr-item" *ngIf="review.isDishonestJob">
+        <div class="col-md-2"><img src="./assets/images/red-flag.jpg" width="30" height="30"/></div>
+        <div class="col-md-6">Recruiter was dishonest about job description and/or salary.</div>
+      </div>
+      <div class="row hhr-item" *ngIf="review.isPersonalInfo">
+        <div class="col-md-2"><img src="./assets/images/red-flag.jpg" width="30" height="30"/></div>
+        <div class="col-md-6">Recruiter just wanted my personal information.</div>
+      </div>
+      <div class="row hhr-item" *ngIf="review.isFakeProfile">
+        <div class="col-md-2"><img src="./assets/images/red-flag.jpg" width="30" height="30"/></div>
+        <div class="col-md-6">Recruiter may be fake profile.</div>
+      </div>
+      <div class="row hhr-item">
+        <div class="col-md-2">Title</div>
+        <div class="col-md-6">{{ review.title }}</div>
+      </div>
+      <div class="row hhr-item">
+        <div class="col-md-2">Description</div>
+        <div class="col-md-6">{{ review.body }}</div>
+      </div>
+      <div class="row hhr-item">
+        <div class="col-md-2">Reviewer</div>
+        <div class="col-md-4">
+          <a href="mailto:{{review.candidate.email}}">{{ review.candidate.name }}</a><br>
+          {{ review.candidate.title }}<br>
+          {{ review.candidate.email }}<br>
+        </div>
+      </div>
+      <div class="row hhr-item">
+        <div class="col-md-2">Date</div>
+        <div class="col-md-4">{{ review.date | date: 'MM/dd/yyyy' }}</div>
+      </div>
+    </div>
+</div>

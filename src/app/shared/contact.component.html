@@ -1,0 +1,48 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">Contact Us</div>
+    <div class="panel-body">
+        <div class="row"><h3>We need your feedback</h3></div>
+        <div class="row home-tag contact-row"><b>Contact Form. Email. Twitter.</b></div>
+        <div class="row">
+            <div class="col-lg-6"  *ngIf="messageSent">
+                <b>Thanks!</b><br>
+                We love hearing from our users.<br><br>
+                Your feedback will help us build a better user experience!
+            </div>
+            <div class="col-lg-6"  *ngIf="!messageSent">
+              <form #form="ngForm" (submit)="submitForm(form)" novalidate>
+              <div class="row contact-row" [class.has-error]="email.invalid && email.touched">
+                <div class="col-lg-2"><b>Email</b></div>
+                <div class="col-lg-4">
+                  <input #email="ngModel" type="text" name="email" [(ngModel)]="model.email" required>
+                </div>
+              </div>
+              <div class="row contact-row" [class.has-error]="subject.invalid && subject.touched">
+                <div class="col-lg-2"><b>Subject</b></div>
+                <div class="col-lg-4">
+                  <input #subject="ngModel" type="text" name="subject" [(ngModel)]="model.subject" required>
+                </div>
+              </div>
+              <div class="row contact-row" [class.has-error]="message.invalid && message.touched">
+                <div class="col-lg-2"><b>Message</b></div>
+                <div class="col-lg-4">
+                  <textarea required cols="50" rows="10" #message="ngModel" type="text" name="message" [(ngModel)]="model.message">
+                    {{model.message}}
+                  </textarea>
+                </div>
+              </div>
+              <div class="row contact-row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-4">
+                  <button type="reset" class="btn btn-default" (click)='onBack()'>Cancel</button>
+                  <button type="submit" class="btn btn-success" [disabled]="form.invalid">Submit Your Message</button>
+                </div>
+              </div>
+             </form>
+            </div>
+            <div class="col-lg-6">
+              <img src="./assets/images/contact-us.jpg" class="img-responsive"/>
+            </div>
+        </div>
+    </div>
+</div>

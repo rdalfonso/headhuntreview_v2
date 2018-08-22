@@ -1,0 +1,41 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading-admin'>
+        {{ pageTitle }}
+    </div>
+    <div class='panel-body'>
+      <div class='row'>
+        <div class='col-lg-6 search-row'>
+          <span style="color:green;"><b>[Candidates]^</b></span>
+          <span><a [routerLink]="['/admin/companies']"><b>[Companies]</b></a> </span>
+          <span><a [routerLink]="['/admin/recruiters']"><b>[Recruiters]</b></a></span>
+          <span><a [routerLink]="['/admin/reviews']"><b>[Reviews]</b></a> </span>
+        </div>
+      </div>
+        <div class='row'>
+          <div class='col-md-6' style="padding-bottom:10px;">
+            <input type="search" class="search-text" [(ngModel)]='listFilter' placeholder="Search Professionals..." />
+          </div>
+          <div class='col-md-6' style="padding-bottom:10px;">
+            <button class="btn btn-primary" (click)='onAddCandidate()'>Add Candidate</button>
+          </div>
+        </div>
+        <div class="container" *ngIf='filteredCandidates && filteredCandidates.length'>
+          <div class="row hidden-xs">
+            <div class="col-md-2"><b>Name</b></div>
+            <div class="col-md-3"><b>Title</b></div>
+            <div class="col-md-3"><b>Email</b></div>
+            <div class="col-md-2"><b>Reviews</b></div>
+          </div>
+          <div class="row" *ngFor='let candidate of filteredCandidates'>
+            <div class="col-md-2"><a [routerLink]="['/admin/candidates', candidate.uniqueId]">{{ candidate.name }}</a></div>
+            <div class="col-md-3">{{ candidate.title }}</div>
+            <div class="col-md-3">{{ candidate.email }}</div>
+            <div class="col-md-2">
+              <a [routerLink]="['/admin/candidates', candidate.uniqueId]">{{ candidate.reviews.length }}
+                <span class="hidden-lg">Reviews</span>
+              </a>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div>
+  <div class="row header">
+    <div class='col-md-2 logo hidden-xs'>
+      <a [routerLink]="['/welcome']">
+        <button type="submit" class="btn btn-info" (click)='onHome()'>BETA VERSION</button>
+      </a>
+    </div>
+    <div class='col-md-8'>
+      <h2><span class="hidden-xs">Welcome to </span>Head Hunt Review</h2>
+    </div>
+    <div *ngIf = "userLoggedIn" class='col-md-2 signbar'>
+      <button class="btn btn-success" [routerLink]="['/profile', userAuthId]">Your Profile</button>
+      <button class="btn btn-info" (click)='logout()'>Logout</button>
+    </div>
+    <div *ngIf = "!userLoggedIn" class='col-md-2 signbar'>
+      <button class="btn btn-success" [routerLink]="['/admin/signup']">Sign Up Now</button>
+      <button class="btn btn-info"  [routerLink]="['/admin/login']">Login</button>
+    </div>
+  </div>
+  <div class="row">
+      <div class='container'>
+          <router-outlet></router-outlet>
+      </div>
+   </div>
+   <div class="row footer">
+     <div class='col-md-12'>
+       <a [routerLink]="['/about']">About Us</a> |
+       <a [routerLink]="['/contact']">Contact Us</a>
+     </div>
+   </div>
+</div>

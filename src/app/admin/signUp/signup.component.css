@@ -1,0 +1,52 @@
+thead {
+    color: #337AB7;
+}
+
+input[type=email] {
+    padding:5px;
+    border:2px solid #ccc;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    width: 300px;
+}
+
+input[type=email]:focus {
+    border-color:#333;
+}
+
+input[type=text] {
+    padding:5px;
+    border:2px solid #ccc;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    width: 300px;
+}
+
+input[type=text]:focus {
+    border-color:#333;
+}
+
+input[type=password] {
+    padding:5px;
+    border:2px solid #ccc;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    width: 300px;
+}
+
+input[type=password]:focus {
+    border-color:#333;
+}
+
+.signup-item {
+  padding-top: 5px;
+  padding-bottom: 10px;
+  width: 95%;
+}
+
+.signup-footer {
+  padding-top: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -1,0 +1,81 @@
+<app-nav></app-nav>
+<div class='panel panel-primary'>
+    <div class='panel-heading panel-headline'>
+      Add Company Form
+    </div>
+    <div class="add-blurb">
+      Please submit a new recruiting company entry using the form below.
+       All submission will be moderated for data integrity.
+    </div>
+    <div style="padding:10px;">
+      <form #form="ngForm" (submit)="submitForm(form)" novalidate>
+        <table class='table' border="0" width="750px">
+          <tbody>
+            <tr class="form-group" [class.has-error]="name.invalid && name.touched">
+              <td width="100px"><label class="control-label">Company</label></td>
+              <td>
+                <input class="form-textbox"  maxlength="50" #name="ngModel" type="text" name="name" placeholder="Company Name" [(ngModel)]="model.name" required>
+                <span *ngIf="name.invalid && name.touched" class="alert alert-danger">Company Name is required.</span>
+             </td>
+           </tr>
+           <tr class="form-group" [class.has-error]="url.invalid && url.touched">
+            <td width="100px"><label class="control-label">Website</label></td>
+            <td>
+              <input maxlength="255" #url="ngModel" type="text" name="url" placeholder="Website" [(ngModel)]="model.url" required>
+              <span *ngIf="url.invalid && url.touched" class="alert alert-danger">Website is required.</span>
+           </td>
+         </tr>
+          <tr class="form-group" [class.has-error]="address1.invalid && address1.touched">
+            <td width="100px"><label class="control-label">Address 1</label></td>
+            <td>
+              <input maxlength="50" #address1="ngModel" type="text" name="address1" placeholder="Address 1" [(ngModel)]="model.address1" required>
+              <span *ngIf="address1.invalid && address1.touched" class="alert alert-danger">Address 1 is required.</span>
+           </td>
+         </tr>
+         <tr class="form-group">
+           <td width="100px"><label>Address 2</label></td>
+           <td>
+             <input maxlength="50" #address2="ngModel" type="text" name="address2"
+             placeholder="Address 2" [(ngModel)]="model.address2">
+          </td>
+        </tr>
+        <tr class="form-group" [class.has-error]="city.invalid && city.touched">
+          <td width="100px"><label class="control-label">City</label></td>
+          <td>
+            <input maxlength="50" #city="ngModel" type="text" name="city" placeholder="City" [(ngModel)]="model.city" required>
+            <span *ngIf="city.invalid && city.touched" class="alert alert-danger">City is required.</span>
+         </td>
+       </tr>
+       <tr class="form-group" [class.has-error]="state.invalid && state.touched">
+         <td width="100px"><label class="control-label">State</label></td>
+         <td>
+           <input maxlength="50" #state="ngModel" type="text" name="state" placeholder="State" [(ngModel)]="model.state" required>
+           <span *ngIf="state.invalid && state.touched" class="alert alert-danger">State is required.</span>
+        </td>
+      </tr>
+      <tr class="form-group" [class.has-error]="zipcode.invalid && zipcode.touched">
+        <td width="100px"><label class="control-label">Zip Code</label></td>
+        <td>
+          <input
+            maxlength="10"
+            #zipcode="ngModel"
+            type="text"
+            name="zipcode"
+            placeholder="Zip Code"
+            [(ngModel)]="model.zipcode"
+            pattern="^(\d{5}(-\d{4})?|[A-Z]\d[A-Z] *\d[A-Z]\d)$"
+            required>
+          <span *ngIf="zipcode.invalid && zipcode.touched" class="alert alert-danger">Zip Code is required.</span>
+       </td>
+      </tr>
+         <tr class="form-group">
+            <td colspan="2">
+              <button type="reset" class="btn btn-default" (click)='onBack()'>Cancel</button>
+              <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Submit</button>
+            </td>
+          </tr>
+          </tbody>
+      </table>
+    </form>
+  </div>
+</div>

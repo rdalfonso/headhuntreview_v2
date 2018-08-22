@@ -1,0 +1,45 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading-admin'>
+        Admin: {{pageTitle}}
+    </div>
+    <div class='panel-body'>
+      <div class='row'>
+        <div class='col-lg-6 search-row'>
+          <span><a [routerLink]="['/admin/candidates']"><b>[Candidates]</b></a> </span>
+          <span><a [routerLink]="['/admin/companies']"><b>[Companies]</b></a></span>
+          <span><a [routerLink]="['/admin/recruiters']"><b>[Recruiters]</b></a> </span>
+          <span style="color:green;"><b>[Reviews]^</b></span>
+        </div>
+      </div>
+        <div class='row'>
+          <div class='col-md-6 search-row'>
+            <input type='text' style="width:250px" [(ngModel)]='listFilter' placeholder="Search Reviews..." />
+            <span><a (click)='seeAll()'>Clear Filters</a></span>
+          </div>
+        </div>
+
+        <div class="container" *ngIf='reviews && reviews.length'>
+          <div class="row hhr-header hidden-xs">
+            <div class="col-md-2"><b>Title</b></div>
+            <div class="col-md-4"><b>Review</b></div>
+            <div class="col-md-2"><b>Recruiter</b></div>
+            <div class="col-md-2"><b>Stars</b></div>
+            <div class="col-md-2"><b>Reviewed By</b></div>
+          </div>
+          <div class="row hhr-item" *ngFor='let review of filteredReviews'>
+          <div class="col-md-2"><a [routerLink]="['/admin/reviews', review.uniqueId]">{{ review.title }}</a></div>
+            <div class="col-md-4">{{review.body}}</div>
+            <div class="col-md-2">
+                <a [routerLink]="['/admin/recruiters', review.recruiter.uniqueId]">{{ review.recruiter.name }}</a>
+            </div>
+            <div class="col-md-2">{{review.stars}}</div>
+            <div class="col-md-2" *ngIf='review.candidate'>
+              <a href="mailto:{{review.candidate.email}}">{{ review.candidate.name }}</a><br>
+              {{ review.candidate.title }}<br>
+              {{ review.candidate.email }}<br>
+              Date: {{ review.date | date: 'MM/dd/yyyy' }}
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

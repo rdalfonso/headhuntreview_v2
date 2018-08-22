@@ -1,0 +1,95 @@
+<app-nav></app-nav>
+<div class='panel panel-primary' *ngIf='company'>
+    <div class='panel-heading'>
+        {{'Company Detail: ' + company.name}}
+    </div>
+    <div class='panel-body'>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-6">
+                <div class="row hhr-item">
+                    <div class="col-lg-3">Name</div>
+                    <div class="col-lg-5">{{ company.name }}</div>
+                </div>
+                <div class="row hhr-item">
+                    <div class="col-lg-3">Address</div>
+                    <div class="col-lg-5">{{ company.address1 }} {{ company.address2 }}</div>
+                </div>
+                <div class="row hhr-item">
+                    <div class="col-lg-3">City</div>
+                    <div class="col-lg-5">{{ company.city }}, {{ company.state }} {{ company.zipcode }}</div>
+                </div>
+                <div class="row hhr-item">
+                    <div class="col-lg-3">Website</div>
+                    <div class="col-lg-5"><a href="{{ company.url }}" target="_blank">{{ company.url }}</a></div>
+                </div>
+                <div class="row hhr-item">
+                    <div class="col-lg-3">Rating</div>
+                    <div class="col-lg-5">
+                      <app-rating
+                        [rating]='(company.recruiters | ratingcompany : "stars" )'
+                        [itemId]='company.uniqueId'>
+                      </app-rating>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+              <iframe
+                width="90%"
+                height="300"
+                frameborder="0"
+                style="border:0"
+                [src]="mapFinalSource | safe"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+<div class='panel panel-primary' *ngIf='company'>
+    <div class='panel-heading'>
+        {{'Recruiter Detail: ' + company.name}}
+    </div>
+    <div align="center" class="hhr-noitem" *ngIf='company.recruiters.length <= 0'>
+      There are no recruiters for this company.
+    </div>
+
+    <div class='panel panel-body' *ngIf='company.recruiters.length > 0'>
+      <div class="container">
+          <div class="col-lg-12 ">
+            <div class="row hhr-header hidden-xs">
+                <div class="col-lg-2"><b>Name</b></div>
+                <div class="col-lg-2"><b>Title</b></div>
+                <div class="col-lg-2"><b>Email</b></div>
+                <div class="col-lg-1"><b>LinkedIn</b></div>
+                <div class="col-lg-1"><b>Reviews</b></div>
+                <div class="col-lg-2"><b>Avg Rating</b></div>
+            </div>
+            <div class="row hhr-item" *ngFor='let recruiter of company.recruiters'>
+              <div class="col-lg-2"><a [routerLink]="['/recruiter', recruiter.uniqueId]">{{ recruiter.name }}</a></div>
+              <div class="col-lg-2">{{ recruiter.title }}</div>
+              <div class="col-lg-2">{{ recruiter.email }}</div>
+              <div class="col-lg-1">
+                <a href="{{ recruiter.linkedIn }}" target="_blank">
+                  <img src="./assets/images/square-linkedin.png" width="30" height="30"/>
+                </a>
+              </div>
+              <div class="col-lg-1">{{ recruiter.reviews.length }}</div>
+              <div class="col-lg-2">
+                <app-rating
+                  [rating]='(recruiter.reviews | ratingrecruiter : "stars" )'
+                  [itemId]='recruiter.uniqueId'>
+                </app-rating>
+              </div>
+              <div class="col-lg-1">
+                <button type="submit" class="btn btn-success" (click)='onAddReview(recruiter.uniqueId)'>Review</button>
+              </div>
+            </div>
+        </div>
+      </div>
+  </div>
+  <div align="center" class="hhr-noitem"  *ngIf="IsLoggedin">
+    <button type="submit" class="btn btn-success" (click)='onAddRecruiter(company.uniqueId)'>Add Recruiter for {{ company.name }}</button>
+  </div>

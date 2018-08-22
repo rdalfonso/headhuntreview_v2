@@ -1,0 +1,65 @@
+
+<div class='panel panel-primary'>
+    <div class='panel-heading-admin'>
+      ADMIN: {{pageTitle}}
+    </div>
+    <div class='panel-body'>
+      <div class='row'>
+        <div class='col-lg-6 search-row'>
+          <span><a [routerLink]="['/admin/candidates']"><b>[Candidates]</b></a> </span>
+          <span><a [routerLink]="['/admin/companies']"><b>[Companies]</b></a></span>
+          <span style="color:green;"><b>[Recruiters]^</b></span>
+          <span><a [routerLink]="['/admin/reviews']"><b>[Reviews]</b></a> </span>
+        </div>
+      </div>
+        <div class='row'>
+          <div class='col-lg-6 search-row'>
+              <input type='text' style="width:250px" [(ngModel)]='listFilter' placeholder="Search Recruiters..." />
+              <span><a (click)='seeAll()'>Clear Filters</a></span>
+          </div>
+          <div class='col-lg-6'>
+            <button class="btn btn-primary" (click)='onAddRecruiter()'>Add New Recruiter</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class='col-lg-6 alphabet-row'>
+              <span *ngFor="let alphabet of alphabets">
+                <a (click)='performAlphabetFilter(alphabet)'>{{alphabet}}</a> |
+              </span>
+          </div>
+        </div>
+        <div align="center" class="hhr-noitem" *ngIf='!filteredRecruiters || filteredRecruiters.length <= 0'>
+          There are no recruiters for this filter.
+        </div>
+        <div class="container-fluid" *ngIf='filteredRecruiters && filteredRecruiters.length'>
+          <div class="row hhr-header hidden-xs">
+            <div class="col-lg-2"><b>Name</b></div>
+            <div class="col-lg-3"><b>Title</b></div>
+            <div class="col-lg-2"><b>Company</b></div>
+            <div class="col-lg-1"><b>Linked</b></div>
+            <div class="col-lg-1"><b>Reviews</b></div>
+            <div class="col-lg-1"><b>Approved</b></div>
+          </div>
+          <div class="row hhr-item-adm" *ngFor='let recruiter of filteredRecruiters'>
+            <div class="col-lg-2">
+              <span class="name">
+                <a [routerLink]="['/admin/recruiters', recruiter.uniqueId]">{{ recruiter.name }}</a>
+              </span>
+            </div>
+            <div class="col-lg-3">{{ recruiter.title }}</div>
+            <div class="col-lg-2">
+                <a [routerLink]="['/admin/companies', recruiter.company.uniqueId]">{{ recruiter.company.name }}</a>
+            </div>
+            <div class="col-lg-1">
+              <a href="{{ recruiter.linkedIn }}" target="_blank">
+                <img src="./assets/images/square-linkedin.png" width="20" height="20"/>
+              </a>
+            </div>
+            <div class="col-lg-1">
+              <a [routerLink]="['/admin/recruiters', recruiter.uniqueId]">{{ recruiter.reviews.length }}</a>
+            </div>
+            <div class="col-lg-1">{{ recruiter.isApproved }}</div>
+          </div>
+        </div>
+    </div>
+</div>

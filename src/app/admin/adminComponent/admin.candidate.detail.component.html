@@ -1,0 +1,34 @@
+<div class='panel panel-primary' *ngIf='candidate'>
+    <div class='panel-heading-admin'>
+        {{'Candidate: ' + candidate.name}}
+    </div>
+    <div class='panel-body'>
+      <div class='row'>
+        <div class='col-lg-6 search-row'>
+          <span style="color:green;"><b>[Candidates]^</b></span>
+          <span><a [routerLink]="['/admin/companies']"><b>[Companies]</b></a> </span>
+          <span><a [routerLink]="['/admin/recruiters']"><b>[Recruiters]</b></a></span>
+          <span><a [routerLink]="['/admin/reviews']"><b>[Reviews]</b></a> </span>
+        </div>
+      </div>
+      <div class="row hhr-item">
+        <div class="col-md-2">Name</div>
+        <div class="col-md-4">{{ candidate.name }}</div>
+      </div>
+      <div class="row hhr-item">
+        <div class="col-md-2">Title</div>
+        <div class="col-md-4">{{ candidate.title }}</div>
+      </div>
+      <div class="row hhr-item">
+        <div class="col-md-2">Email</div>
+        <div class="col-md-4">{{ candidate.email }}</div>
+      </div>
+      <div class='row hhr-footer'>
+        <br>
+        <button class="btn btn-default" (click)='onBack()'>Cancel</button>
+        <button class="btn btn-primary" (click)='onDelete(candidate.uniqueId)'>Delete</button>
+        <button class="btn btn-success" (click)='onResetEmail(candidate.uniqueId)'>Reset Email</button>
+      </div>
+    </div>
+
+</div>

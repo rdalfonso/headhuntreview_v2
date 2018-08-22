@@ -1,0 +1,36 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+        <h4>Password Recovery</h4>
+  </div>
+  <div class="panel-body">
+    <form #form="ngForm" (submit)="submitForm(form)" novalidate>
+      <div class="col-lg-10">
+        <div class="row signup-item">
+          <div class="col-lg-10">
+            Please enter your email address and we will send you an email with instructions for resetting your password
+          </div>
+        </div>
+        <div class="row signup-item">
+          <div class="col-lg-1">
+            <label class="control-label">Email </label>
+          </div>
+          <div class="col-lg-8">
+            <input
+                #email="ngModel"
+                type="email"
+                name="email"
+                placeholder="Enter Email Address"
+                [(ngModel)]="model.email"
+                pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                required>
+              <span *ngIf="email.invalid && email.touched" class="alert alert-danger">Valid Email is required.</span>
+          </div>
+        </div>
+        <div class="row signup-footer">
+          <button type="submit" class="btn btn-success" [disabled]="form.invalid">Reset</button>
+          <button class="btn btn-info" (click)='cancel()'>Back to Sign In</button>
+        </div>
+      </div>
+      </form>
+  </div>
+</div>

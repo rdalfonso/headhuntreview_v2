@@ -1,0 +1,103 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+      <h5>Register an Account</h5>
+  </div>
+  <div class="panel-body">
+      <form #form="ngForm" (submit)="submitForm(form)" novalidate>
+      <div class="col-lg-10">
+        <div class="row signup-item">
+          <div class="col-lg-2">
+            <label class="control-label">Account Type</label>
+          </div>
+          <div class="col-lg-4">
+            <div *ngFor="let item of itemsList">
+              <input type="radio" [(ngModel)]="radioSelected" name="list_name" value="{{item.value}}" (change)="onItemChange(item)"/> {{item.name}}
+            </div>
+          </div>
+        </div>
+        <div class="row signup-item">
+          <div class="col-lg-2">
+            <label class="control-label">Name</label>
+          </div>
+          <div class="col-lg-8">
+              <input maxlength="50" #name="ngModel" type="text" name="name" placeholder="Name" [(ngModel)]="model.name" required>
+              <span *ngIf="name.invalid && name.touched" class="alert alert-danger">Name is required.</span>
+          </div>
+        </div>
+        <div class="row signup-item">
+          <div class="col-lg-2">
+            <label class="control-label">Job Title</label>
+          </div>
+          <div class="col-lg-8">
+              <input maxlength="50" #title="ngModel" type="text" name="title" placeholder="ex, Full Stack Engineer" [(ngModel)]="model.title" required>
+              <span *ngIf="title.invalid && title.touched" class="alert alert-danger">Job Title is required.</span>
+          </div>
+        </div>
+        <div class="row signup-item">
+          <div class="col-lg-2">
+            <label class="control-label">
+              LinkedIn
+              <img src="./assets/images/square-linkedin.png" width="30" height="30"/>
+            </label>
+          </div>
+          <div class="col-lg-8">
+              <input maxlength="50" #linkedin="ngModel" type="text" name="linkedin" placeholder="Linkedin Profile Url" [(ngModel)]="model.linkedin" required>
+              <span *ngIf="linkedin.invalid && linkedin.touched" class="alert alert-danger">Linkedin Url is required.</span>
+          </div>
+        </div>
+
+        <div class="row signup-item">
+          <div class="col-lg-2">
+            <label class="control-label">Email</label>
+          </div>
+          <div class="col-lg-8">
+            <input
+                maxlength="50"
+                #email="ngModel"
+                type="email"
+                name="email"
+                placeholder="Enter Email Address"
+                [(ngModel)]="model.email"
+                pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                required>
+              <span *ngIf="email.invalid && email.touched" class="alert alert-danger">Valid Email is required.</span>
+          </div>
+        </div>
+        <div class="row signup-item">
+            <div class="col-lg-2">
+              <label class="control-label">Password</label>
+            </div>
+            <div class="col-lg-8">
+              <input maxlength="10" #password1="ngModel" type="password" name="password1"
+                placeholder="Enter Password"
+                [(ngModel)]="model.password1" required>
+                <span *ngIf="password1.invalid && password1.touched" class="alert alert-danger">Password is required.</span>
+            </div>
+        </div>
+        <div class="row signup-item">
+            <div class="col-lg-2">
+              <label class="control-label">Confirm</label>
+           </div>
+           <div class="col-lg-8">
+             <input maxlength="10" #password2="ngModel" type="password" name="password2"
+                placeholder="Confirm Password"
+                [(ngModel)]="model.password2" required>
+                <span *ngIf="password2.invalid && password2.touched" class="alert alert-danger">Password Confirm is required.</span>
+                <span *ngIf="passwordFail" class="alert alert-danger">Password Do Not Match.</span>
+            </div>
+        </div>
+
+        <div class="row signup-item">
+            <div class="col-lg-10">
+              <input #terms="ngModel" type="checkbox" name="terms" placeholder="Confirm Password" [(ngModel)]="model.terms">
+              <label class="control-label">I have read and agree to the Terms of Service</label>
+          </div>
+        </div>
+        <div class="row signup-footer">
+          <button type="submit" class="btn btn-success" [disabled]="form.invalid">Sign Up</button>
+          <button type="reset" class="btn btn-default" (click)='cancel()'>Cancel</button>
+        </div>
+      </div>
+      </form>
+  </div>
+</div>

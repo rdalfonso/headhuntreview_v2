@@ -1,0 +1,49 @@
+<app-nav></app-nav>
+<div class='panel panel-primary'>
+    <div class='panel-heading'>{{ pageTitle }}</div>
+    <div class='panel-body'>
+        <div class='row'>
+          <div class='col-lg-6 search-row'>
+            <input type="search" class="search-text" [(ngModel)]='listFilter' placeholder="Search Companies..." />
+              <span><a (click)='seeAll()'>Clear Filters</a> </span>
+          </div>
+          <div class='col-lg-6' *ngIf='IsLoggedin'>
+            <button type="submit" class="btn btn-success" (click)='onAddCompany()'>Add Recruiting Company</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class='col-lg-6 alphabet-row'>
+              <span *ngFor="let alphabet of alphabets">
+                <a (click)='performAlphabetFilter(alphabet)'>{{alphabet}}</a> |
+              </span>
+          </div>
+        </div>
+
+        <div align="center" class="hhr-noitem" *ngIf='!IsLoggedin'>
+          You must login to see recruiting companies.
+        </div>
+        <div align="center" class="hhr-noitem" *ngIf='IsLoggedin && (!filteredCompanies || filteredCompanies.length <= 0)'>
+          There are no recruiting companies for this filter.
+        </div>
+        <div class="container" *ngIf='filteredCompanies && filteredCompanies.length'>
+          <div class="row hhr-header hidden-xs">
+            <div class="col-lg-3"><b>Name</b></div>
+            <div class="col-lg-1"><b>Website</b></div>
+            <div class="col-lg-4"><b>Address</b></div>
+            <div class="col-lg-3"><b>City</b></div>
+            <div class="col-lg-1"><b>Recruiters</b></div>
+          </div>
+          <div class="row hhr-item" *ngFor='let company of filteredCompanies'>
+            <div class="col-lg-3"><a [routerLink]="['/company', company.uniqueId]">{{ company.name }}</a></div>
+            <div class="col-lg-1">
+              <a href="{{ company.url }}" target="_blank"><img src="./assets/images/chain.png" width="20" height="20"/></a>
+            </div>
+            <div class="col-lg-4">{{ company.address1 }} {{ company.address2 }}</div>
+            <div class="col-lg-3">{{ company.city }}, {{ company.state }}</div>
+            <div class="col-lg-1"><a [routerLink]="['/company', company.uniqueId]">
+              {{ company.recruiters.length }} <span class="hidden-lg">Employees</span></a>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

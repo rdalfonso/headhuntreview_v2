@@ -1,0 +1,57 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading-admin'>
+        Admin: {{ pageTitle }}
+    </div>
+    <div class='panel-body'>
+      <div class='row'>
+        <div class='col-lg-6 search-row'>
+          <span><a [routerLink]="['/admin/candidates']"><b>[Candidates]</b></a> </span>
+          <span style="color:green;"><b>[Companies]^</b></span>
+          <span><a [routerLink]="['/admin/recruiters']"><b>[Recruiters]</b></a></span>
+          <span><a [routerLink]="['/admin/reviews']"><b>[Reviews]</b></a> </span>
+        </div>
+      </div>
+        <div class='row'>
+          <div class='col-lg-6 search-row'>
+            <input type='text' style="width:250px" [(ngModel)]='listFilter' placeholder="Search Companies..." />
+            <span><a (click)='seeAll()'>Clear Filters</a> </span>
+          </div>
+          <div class='col-lg-6'>
+            <button type="submit" class="btn btn-primary" (click)='onAddCompany()'>Add New Company</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class='col-lg-12 alphabet-row'>
+              <span *ngFor="let alphabet of alphabets">
+                <a (click)='performAlphabetFilter(alphabet)'>{{alphabet}}</a> |
+              </span>
+          </div>
+        </div>
+        <div align="center" class="hhr-noitem" *ngIf='!filteredCompanies || filteredCompanies.length <= 0'>
+          There are no recruiting companies for this filter.
+        </div>
+
+        <div class="container" *ngIf='filteredCompanies && filteredCompanies.length'>
+          <div class="row hhr-header hidden-xs">
+            <div class="col-lg-3"><b>Name</b></div>
+            <div class="col-lg-1"><b>Website</b></div>
+            <div class="col-lg-4"><b>Address</b></div>
+            <div class="col-lg-2"><b>City</b></div>
+            <div class="col-lg-1"><b>R#</b></div>
+            <div class="col-lg-1"><b>Approved</b></div>
+          </div>
+          <div class="row hhr-item-adm" *ngFor='let company of filteredCompanies'>
+            <div class="col-lg-3"><a [routerLink]="['/admin/companies', company.uniqueId]">{{ company.name }}</a></div>
+            <div class="col-lg-1">
+              <a href="{{ company.url }}" target="_blank"><img src="./assets/images/chain.png" width="20" height="20"/></a>
+            </div>
+            <div class="col-lg-4">{{ company.address1 }} {{ company.address2 }}</div>
+            <div class="col-lg-2">{{ company.city }}, {{ company.state }}</div>
+            <div class="col-lg-1"> {{ company.recruiters.length }}</div>
+            <div class="col-lg-1">
+              <a [routerLink]="['/admin/companies', company.uniqueId]">{{ company.isApproved }}</a>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

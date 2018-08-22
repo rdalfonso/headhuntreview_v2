@@ -1,0 +1,36 @@
+<app-nav></app-nav>
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        {{ pageTitle }}
+    </div>
+    <div class='panel-body'>
+        <div class='row'>
+          <div class='col-md-6' style="padding-bottom:10px;">
+            <input type="search" class="search-text" [(ngModel)]='listFilter' placeholder="Search Professionals..." />
+          </div>
+        </div>
+        <div class="container" *ngIf='filteredCandidates && filteredCandidates.length'>
+          <div class="row hhr-header hidden-xs">
+            <div class="col-md-2"><b>Name</b></div>
+            <div class="col-md-3"><b>Title</b></div>
+            <div class="col-md-3"><b>Email</b></div>
+            <div class="col-md-2"><b>Reviews</b></div>
+          </div>
+          <div class="row hhr-item" *ngFor='let candidate of filteredCandidates'>
+            <div class="col-md-2"><a [routerLink]="['/candidate', candidate.uniqueId]">{{ candidate.name }}</a></div>
+            <div class="col-md-3">{{ candidate.title }}</div>
+            <div class="col-md-3">{{ candidate.email }}</div>
+            <div class="col-md-2">
+              <a [routerLink]="['/candidate', candidate.uniqueId]">{{ candidate.reviews.length }}
+                <span class="hidden-lg">Reviews</span>
+              </a>
+            </div>
+          </div>
+          <div class="row hhr-footer" align="center">
+            <div class="col-md-6"  *ngIf="IsLoggedin">
+              <button type="submit" class="btn btn-primary" (click)='onAddCandidate()'>Add Candidate</button>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<div class='panel panel-primary' *ngIf='company'>
+    <div class='panel-heading-admin'>
+      Admin: {{'Company Detail: ' + company.name}}
+    </div>
+    <div class='panel-body'>
+        <div class="container">
+          <div class='row'>
+            <div class='col-lg-6 search-row'>
+              <span><a [routerLink]="['/admin/candidates']"><b>[Candidates]</b></a> </span>
+              <span style="color:green;"><b>[Companies]^</b></span>
+              <span><a [routerLink]="['/admin/recruiters']"><b>[Recruiters]</b></a></span>
+              <span><a [routerLink]="['/admin/reviews']"><b>[Reviews]</b></a> </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+                <div class="row hhr-item">
+                    <div class="col-lg-3">Name</div>
+                    <div class="col-lg-5">{{ company.name }}</div>
+                </div>
+                <div class="row hhr-item">
+                    <div class="col-lg-3">Address</div>
+                    <div class="col-lg-5">{{ company.address1 }} {{ company.address2 }}</div>
+                </div>
+                <div class="row hhr-item">
+                    <div class="col-lg-3">City</div>
+                    <div class="col-lg-5">{{ company.city }}, {{ company.state }} {{ company.zipcode }}</div>
+                </div>
+                <div class="row hhr-item">
+                    <div class="col-lg-3">Website</div>
+                    <div class="col-lg-5"><a href="{{ company.url }}" target="_blank">{{ company.url }}</a></div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12 hhr-footer">
+                    <button class='btn btn-default' (click)='onBack()'> << Back</button>
+                    <button class='btn btn-default' (click)='onDelete(company.uniqueId)' style='width:80px'>Delete</button>
+                    <button class='btn btn-success' (click)='onApprove(company.uniqueId)' style='width:80px'>Approve</button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12 hhr-footer">
+                    <button class="btn btn-primary" (click)='onAddRecruiter(company.uniqueId)'>Add Recruiter for {{ company.name }}</button>
+                  </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+              <iframe
+                width="90%"
+                height="300"
+                frameborder="0"
+                style="border:0"
+                [src]="mapFinalSource | safe"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>

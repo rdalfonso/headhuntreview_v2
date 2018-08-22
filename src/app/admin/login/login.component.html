@@ -1,0 +1,43 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+        <h4>Logon to your Account</h4>
+  </div>
+  <div class="panel-body">
+      <form #form="ngForm" (submit)="submitForm(form)" novalidate>
+      <div class="col-lg-10">
+        <div class="row signup-item">
+          <div class="col-lg-1">
+            <label class="control-label">Username </label>
+          </div>
+          <div class="col-lg-8">
+            <input
+                #email="ngModel"
+                type="email"
+                name="email"
+                placeholder="Enter Email Address"
+                [(ngModel)]="model.email"
+                pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                required>
+              <span *ngIf="email.invalid && email.touched" class="alert alert-danger">Valid Email is required.</span>
+          </div>
+        </div>
+        <div class="row signup-item">
+            <div class="col-lg-1">
+              <label class="control-label">Password</label>
+            </div>
+            <div class="col-lg-8">
+              <input #password1="ngModel" type="password" name="password1"
+                placeholder="Enter Password"
+                [(ngModel)]="model.password1" required>
+                <span *ngIf="password1.invalid && password1.touched" class="alert alert-danger">Password is required.</span>
+            </div>
+        </div>
+        <div class="row signup-footer">
+          <button type="submit" class="btn btn-success" [disabled]="form.invalid">Login</button>
+          <button type="reset" class="btn btn-info" (click)='forgot()'>Forgot Password</button>
+          <button type="reset" class="btn btn-default" (click)='cancel()'>Cancel</button>
+        </div>
+      </div>
+      </form>
+  </div>
+</div>

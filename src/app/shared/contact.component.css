@@ -1,0 +1,14 @@
+input[type=text] {
+    padding:5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.contact-row {
+  padding-bottom: 10px;
+}
+
+.col-lg-4 {
+  width: 70%;
+}

@@ -1,0 +1,71 @@
+<app-nav></app-nav>
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        {{ pageTitle }}
+    </div>
+    <div class='panel-body'>
+        <div class='row'>
+          <div class='col-lg-6 search-row'>
+              <input type="search" class="search-text" [(ngModel)]='listFilter' placeholder="Search Recruiters..." />
+              <span><a (click)='seeAll()'>Clear Filters</a></span>
+          </div>
+          <div class='col-lg-6' *ngIf='IsLoggedin'>
+            <button class="btn btn-success" (click)='onAddRecruiter()'>Add New Recruiter</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class='col-lg-6 alphabet-row'>
+              <span *ngFor="let alphabet of alphabets">
+                <a (click)='performAlphabetFilter(alphabet)'>{{alphabet}}</a> |
+              </span>
+          </div>
+        </div>
+        <div align="center" class="hhr-noitem" *ngIf='!IsLoggedin'>
+          You must login to see recruiters.
+        </div>
+        <div align="center" class="hhr-noitem" *ngIf='IsLoggedin && (!filteredRecruiters || filteredRecruiters.length <= 0)'>
+          There are no recruiters for this filter.
+        </div>
+        <div class="container-fluid" *ngIf='filteredRecruiters && filteredRecruiters.length'>
+          <div class="row hhr-header hidden-xs">
+            <div class="col-lg-2"><b>Name</b></div>
+            <div class="col-lg-3"><b>Title</b></div>
+            <div class="col-lg-3"><b>Company</b></div>
+            <div class="col-lg-1"><b>Reviews</b></div>
+            <div class="col-lg-2"><b>Avg Rating</b></div>
+            <div class="col-lg-1"></div>
+          </div>
+          <div class="row hhr-item" *ngFor='let recruiter of filteredRecruiters'>
+            <div class="col-lg-2 recruiter-name">
+              <span class="icon">
+                <a href="{{ recruiter.linkedIn }}" target="_blank">
+                  <img src="./assets/images/square-linkedin.png" width="20" height="20"/>
+                </a>
+              </span>
+              <span class="name">
+                <a [routerLink]="['/recruiter', recruiter.uniqueId]">{{ recruiter.name }}</a>
+              </span>
+              <div style="clear: both;"></div>
+            </div>
+            <div class="col-lg-3">{{ recruiter.title }}</div>
+            <div class="col-lg-3">
+                <a [routerLink]="['/company', recruiter.company.uniqueId]">{{ recruiter.company.name }}</a>
+            </div>
+            <div class="col-lg-1">
+              <a [routerLink]="['/recruiter', recruiter.uniqueId]">{{ recruiter.reviews.length }}
+                <span class="hidden-lg">Reviews</span>
+              </a>
+            </div>
+            <div class="col-lg-2">
+              <app-rating
+                  [rating]='(recruiter.reviews | ratingrecruiter : "stars" )'
+                  [itemId]='recruiter.uniqueId'>
+              </app-rating>
+            </div>
+            <div class="col-lg-1"  *ngIf="IsLoggedin">
+              <button type="submit" class="btn btn-success" (click)='onAddReview(recruiter.uniqueId)'>Review</button>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

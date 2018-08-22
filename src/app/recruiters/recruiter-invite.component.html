@@ -1,0 +1,85 @@
+<app-nav></app-nav>
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+      Join HeadHuntReviews
+    </div>
+    <div class="add-blurb">
+      Get the benefits of real client reviews, exposure to candidates, and the validity of being part of the largest recruiter review site on the internet.
+    </div>
+    <div style="padding:10px;">
+      <form #form="ngForm" (submit)="submitForm(form)" novalidate>
+        <table class='table' border="0" width="750px">
+          <tbody>
+            <tr class="form-group" [class.has-error]="name.invalid && name.touched">
+              <td width="100px"><label class="control-label">Name</label></td>
+              <td>
+                <input maxlength="50" #name="ngModel" type="text" name="name" placeholder="Name" [(ngModel)]="model.name" required>
+                <span *ngIf="name.invalid && name.touched" class="alert alert-danger">Name is required.</span>
+             </td>
+           </tr>
+            <tr class="form-group" [class.has-error]="companyName.invalid && companyName.touched">
+              <td width="100px"><label class="control-label">Company</label></td>
+              <td>
+                <input maxlength="50" #companyName="ngModel" type="text" name="companyName" placeholder="Company Name"
+                  [(ngModel)]="model.companyName" required>
+                    <span *ngIf="companyName.invalid && companyName.touched" class="alert alert-danger">Company Name is required.</span>
+             </td>
+          </tr>
+          <tr class="form-group" [class.has-error]="title.invalid && title.touched">
+            <td width="100px"><label class="control-label">Title</label></td>
+            <td>
+              <input
+                maxlength="50"
+                #title="ngModel"
+                type="text"
+                name="title"
+                placeholder="Ex, 'Senior Executive'"
+                [(ngModel)]="model.title"
+              >
+              <span *ngIf="title.invalid && title.touched" class="alert alert-danger">Title is required.</span>
+           </td>
+         </tr>
+         <tr class="form-group" [class.has-error]="linkedin.invalid && linkedin.touched">
+           <td width="100px"><label class="control-label">LinkedIn</label></td>
+           <td>
+             <input
+                maxlength="300"
+                #linkedin="ngModel"
+                type="text"
+                name="linkedin"
+                placeholder="LinkedIn Profile Url"
+                [(ngModel)]="model.linkedin"
+              >
+             <img src="./assets/images/square-linkedin.png" width="30" height="30"/>
+             <span *ngIf="linkedin.invalid && linkedin.touched" class="alert alert-danger">LinkedIn is required.</span>
+           </td>
+        </tr>
+        <tr class="form-group" [class.has-error]="email.invalid && email.touched">
+          <td width="100px"><label class="control-label">Email</label></td>
+          <td>
+            <input
+              #email="ngModel"
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              [(ngModel)]="model.email"
+              pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+              required>
+            <span *ngIf="email.invalid && email.touched" class="alert alert-danger">Valid Email is required.</span>
+         </td>
+       </tr>
+       <tr class="form-group">
+            <td width="100px"><label class="control-label">Phone</label></td>
+            <td><input placeholder="Phone Number" maxlength="50" #level="ngModel" type="text" name="level" [(ngModel)]="model.level"></td>
+         </tr>
+          <tr class="form-group">
+            <td colspan="2">
+              <button type="reset" class="btn btn-default" (click)='onBack()'>Cancel</button>
+              <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Submit</button>
+            </td>
+          </tr>
+          </tbody>
+      </table>
+    </form>
+  </div>
+</div>

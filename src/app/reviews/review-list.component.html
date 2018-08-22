@@ -1,0 +1,37 @@
+<app-nav></app-nav>
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+      {{ pageTitle }}
+    </div>
+    <div class='panel-body'>
+        <div class='row'>
+          <div class='col-lg-6 search-row'>
+            <input type="search" class="search-text" [(ngModel)]='listFilter' placeholder="Search Reviews..." />
+          </div>
+        </div>
+        <div align="center" class="hhr-noitem" *ngIf='!IsLoggedin'>
+          You must login to see reviews.
+        </div>
+        <div class="container" *ngIf='IsLoggedin && (filteredReviews && filteredReviews.length)'>
+          <div class="row hhr-header hidden-xs">
+            <div class="col-md-2"><b>Title</b></div>
+            <div class="col-md-4"><b>Review</b></div>
+            <div class="col-md-2"><b>Recruiter</b></div>
+            <div class="col-md-2"><b>Stars</b></div>
+            <div class="col-md-2"><b>Reviewed By</b></div>
+          </div>
+          <div class="row hhr-item" *ngFor='let review of filteredReviews'>
+            <div class="col-md-2"><a [routerLink]="['/review', review.uniqueId]">{{ review.title }}</a></div>
+            <div class="col-md-4">{{review.body | truncate : 300 }}</div>
+            <div class="col-md-2"><a [routerLink]="['/recruiter', review.recruiter.uniqueId]">{{ review.recruiter.name }}</a></div>
+            <div class="col-md-2"><app-rating [rating]='review.stars' [itemId]='review.uniqueId'></app-rating></div>
+            <div class="col-md-2" *ngIf='review.candidate'>
+              <a href="mailto:{{review.candidate.email}}">{{ review.candidate.name }}</a><br>
+              {{ review.candidate.title }}<br>
+              {{ review.candidate.email }}<br>
+              Date: {{ review.date | date: 'MM/dd/yyyy' }}
+            </div>
+          </div>
+        </div>
+    </div>
+</div>

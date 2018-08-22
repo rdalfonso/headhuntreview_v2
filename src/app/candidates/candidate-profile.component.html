@@ -1,0 +1,173 @@
+<app-nav></app-nav>
+<div class='panel panel-primary' *ngIf='candidate'>
+    <div class='panel-heading'>
+        <h4>{{candidate.name}}</h4>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <div class='panel-body' *ngIf="IsEditProfileMode">
+          <form #form="ngForm" (submit)="submitFormProfile(form)" novalidate>
+          <div class="row profile-item">
+            <div class="col-lg-6"><h4>Your Profile</h4></div>
+          </div>
+          <div class="row profile-item">
+            <div class="col-lg-2">Name</div>
+            <div class="col-lg-4">
+              <input maxlength="50" #name="ngModel" type="text" name="name" placeholder="Name" [(ngModel)]="model.name" required>
+              <span *ngIf="name.invalid && name.touched" class="alert alert-danger">Name is required.</span>
+            </div>
+          </div>
+          <div class="row profile-item">
+            <div class="col-lg-2">Job Title</div>
+            <div class="col-lg-4">
+              <input maxlength="50" #title="ngModel" type="text" name="title" placeholder="ex, Full Stack Engineer" [(ngModel)]="model.title" required>
+              <span *ngIf="title.invalid && title.touched" class="alert alert-danger">Job Title is required.</span>
+            </div>
+          </div>
+          <div class="row profile-item">
+            <div class="col-lg-2">Email</div>
+            <div class="col-lg-4">
+              <input
+                  maxlength="50"
+                  #email="ngModel"
+                  type="email"
+                  name="email"
+                  placeholder="Enter Email Address"
+                  [(ngModel)]="model.email"
+                  pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                  required>
+                <span *ngIf="email.invalid && email.touched" class="alert alert-danger">Valid Email is required.</span>
+            </div>
+          </div>
+          <div class='hhr-footer'>
+            <button type="submit" class="btn btn-success" [disabled]="form.invalid">Update Your Profile</button>
+            <button type="button" class="btn btn-primary" (click)='onCancelProfile()'>Cancel</button>
+          </div>
+        </form>
+        </div>
+
+        <div class='panel-body' *ngIf="!IsEditProfileMode">
+          <div class="row profile-item">
+            <div class="col-lg-6"><h4>Your Profile</h4></div>
+          </div>
+          <div class="row profile-item">
+            <div class="col-lg-2">Name</div>
+            <div class="col-lg-4">{{ candidate.name }}</div>
+          </div>
+          <div class="row profile-item">
+            <div class="col-lg-2">Job Title</div>
+            <div class="col-lg-4">{{ candidate.title }}</div>
+          </div>
+          <div class="row profile-item">
+            <div class="col-lg-2">Email</div>
+            <div class="col-lg-4">{{ candidate.email }}</div>
+          </div>
+          <div class='hhr-footer'>
+            <button type="submit" class="btn btn-success" (click)='onEdit()'>Edit Your Profile</button>
+            <button *ngIf="IsAdmin" type="submit" class="btn btn-primary" (click)='onDelete(candidate.uniqueId)'>Delete</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class='panel-body' *ngIf="IsEditPasswordMode">
+          <form #form="ngForm" (submit)="submitFormPassword(form)" novalidate>
+          <div class="row hhr-item">
+            <div class="col-lg-6"><h4>Your Password</h4></div>
+          </div>
+          <div class="row profile-item">
+            <div class="col-lg-3">New Password</div>
+            <div class="col-lg-3">
+              <input #password1="ngModel" type="password" name="password1"
+                placeholder="New Password"
+                [(ngModel)]="model.password1" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-3 alert alert-danger" *ngIf="password1.invalid && password1.touched">
+              Password is required.
+            </div>
+          </div>
+          <div class="row profile-item">
+            <div class="col-lg-3">Password Confirm</div>
+            <div class="col-lg-3">
+              <input maxlength="10" #password2="ngModel" type="password" name="password2"
+                 placeholder="Confirm Password"
+                 [(ngModel)]="model.password2" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-4 alert alert-danger" *ngIf="passwordFail" >Passwords Must Match.</div>
+          </div>
+
+          <div class='hhr-footer'>
+            <button type="submit" class="btn btn-success" [disabled]="form.invalid">
+              Update Your Password</button>
+            <button type="button" class="btn btn-primary" (click)='onCancelPassword()'>Cancel</button>
+          </div>
+        </form>
+        </div>
+
+        <div class='panel-body' *ngIf="!IsEditPasswordMode">
+          <div class="row profile-item">
+            <div class="col-lg-6"><h4>Your Password</h4></div>
+          </div>
+          <div class="row profile-item">
+            <div class="col-lg-3">Password</div>
+            <div class="col-lg-3">***********</div>
+          </div>
+          <div class="row profile-item">
+            <div class="col-lg-3">Confirm</div>
+            <div class="col-lg-3">************</div>
+          </div>
+          <div class="row profile-item">
+            <div class="col-lg-6"><i>Password should be 6-8 characters.</i></div>
+          </div>
+
+          <div class='hhr-footer'>
+            <button type="submit" class="btn btn-success" (click)='onPasswordEdit()'>Edit Your Password</button>
+            <button *ngIf="IsAdmin" type="submit" class="btn btn-primary" (click)='onDelete(candidate.uniqueId)'>Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class='panel-body'>
+      <div class="row hhr-item">
+        <div class="col-lg-3"><h4>Your Reviews</h4></div>
+      </div>
+      <div class="container">
+        <div class="row hhr-header hidden-xs">
+          <div class="col-lg-2"><b>Title</b></div>
+          <div class="col-lg-4"><b>Review</b></div>
+          <div class="col-lg-2"><b>Rating</b></div>
+          <div class="col-lg-2"><b>Flags</b></div>
+          <div class="col-lg-1"><b>Date</b></div>
+        </div>
+        <div class="row hhr-item" *ngFor='let review of candidate.reviews'>
+          <div class="col-lg-2"><a [routerLink]="['/review', review.uniqueId]">{{ review.title }}</a></div>
+          <div class="col-lg-4">{{review.body | truncate : 200 }}</div>
+          <div class="col-lg-2">
+            <app-rating [rating]='review.stars' [itemId]='review.uniqueId'></app-rating>
+          </div>
+          <div class="col-lg-2">
+            <span *ngIf="review.isTooAggressive">Aggressive </span>
+            <span *ngIf="review.isDishonestJob">Dishonest </span>
+            <span *ngIf="review.isPersonalInfo">Data Thief </span>
+            <span *ngIf="review.isFakeProfile">Fake Profile </span>
+          </div>
+          <div class="col-lg-1">
+            <div>{{ review.date | date: 'MM/dd/yyyy' }}</div>
+          </div>
+          <!--
+          <div class="col-lg-1">
+            <div><button type="submit" class="btn btn-success" (click)='onEditReview(review.uniqueId)'>Edit</button></div>
+          </div>
+        -->
+        </div>
+      </div>
+    </div>
+</div>
