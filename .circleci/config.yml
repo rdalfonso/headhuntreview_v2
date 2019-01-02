@@ -41,9 +41,3 @@ jobs:
         key: v1-{{ .Branch }}-{{ epoch }}
         paths:
           - /caches/headhuntreview_v2.tar
-    - deploy:
-        name: Push Application Docker Image
-        command: |
-          if [ "${CIRCLE_BRANCH}" == "master" ]; then
-            $DOCKER_HUB_TRIGGER
-          fi
