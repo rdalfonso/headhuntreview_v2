@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiEndpoint: 'http://localhost:5002/api',
+  apiEndpoint: 'http://localhost:5000/api',
   apiMapUrl: 'https://www.google.com/maps/embed/v1/place?key=',
   apiMapKey: 'AIzaSyDNubxaoKzoVZ554NYuPJ4kDGEZWaRx1Tw',
   authDomain: 'headhunterreviews-ffb31.firebaseapp.com',
