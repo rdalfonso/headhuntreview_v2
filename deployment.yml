@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: headhunterreviews-dep-2
+  labels:
+    #Project ID
+    app: headhunterreviews-ffb31
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: headhunterreviews-ffb31
+    spec:
+      containers:
+      - name: site
+        image: "gcr.io/headhunterreviews-ffb31/angular-app"
+        ports:
+        - containerPort: 4200
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 4200

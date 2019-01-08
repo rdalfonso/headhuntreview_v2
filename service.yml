@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  #Service name
+  name: headhuntreviews-svc-2
+spec:
+  selector:
+    app:  headhunterreviews-ffb31
+  ports:
+    - protocol: TCP
+      port: 4200
+      targetPort: 4200
+  type: LoadBalancer
