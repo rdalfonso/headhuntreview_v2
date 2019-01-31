@@ -12,7 +12,7 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class CandidateService {
-    private _candidateUrl  = environment.apiEndpoint + '/Candidate';
+    private _candidateUrl  = "http://35.222.255.128/api/Candidate";
     constructor(private _http: HttpClient) { }
 
     getCandidates(): Observable<ICandidate[]> {

@@ -13,7 +13,7 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class ReviewService {
 
-    private _reviewUrl = environment.apiEndpoint + '/Review';
+    private _reviewUrl = 'http://35.222.255.128/api/Review';
     constructor(private _http: HttpClient) {
 
     }
