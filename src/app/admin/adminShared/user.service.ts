@@ -16,11 +16,11 @@ import { environment } from '../../../environments/environment';
 @Injectable()
 export class UserService implements CanActivate {
     private _apiMapKey  = environment.apiMapKey;
-    private _authDomain = environment.authDomain;
-    private _fbDatabaseUrl = environment.fbDatabaseUrl;
-    private _projectId = environment.projectId;
-    private _storageBucket = environment.storageBucket;
-    private _messagingSenderId = environment.messagingSenderId;
+    private _authDomain = environment.firebase.authDomain;
+    private _fbDatabaseUrl = environment.firebase.databaseURL;
+    private _projectId = environment.firebase.projectId;
+    private _storageBucket = environment.firebase.storageBucket;
+    private _messagingSenderId = environment.firebase.messagingSenderId;
 
     public userLoggedin = false;
     public loggedinUser: string;
@@ -90,12 +90,12 @@ export class UserService implements CanActivate {
         firebase.auth().createUserWithEmailAndPassword(email, password)
         .then((firebaseUser) => {
           alert(`Welcome ${name}`);
-          firebaseUser.updateProfile({ displayName: name, photoURL: ''})
+          firebaseUser.user.updateProfile({ displayName: name, photoURL: ''})
           .then(function() {  console.log(name + 'updated'); }).catch(function(error) {
             console.log('error update firebase user post reg');
           });
 
-          const candidate = new Candidate(name, title, firebaseUser.email, 0, firebaseUser.uid);
+          const candidate = new Candidate(name, title, firebaseUser.user.email, 0, firebaseUser.user.uid);
           this.candidateService.addCandidate(candidate)
             .subscribe(
                 result => {
@@ -116,7 +116,7 @@ export class UserService implements CanActivate {
       .then(() => {
         firebase.auth().signInWithEmailAndPassword(email, password)
           .then((firebaseUser) => {
-            welcome += (firebaseUser.displayName) ? firebaseUser.displayName : '';
+            welcome += (firebaseUser.user.displayName) ? firebaseUser.user.displayName : '';
             alert(welcome);
             this.router.navigate(['/']);
           })
