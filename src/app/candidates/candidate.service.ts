@@ -22,7 +22,7 @@ export class CandidateService {
     }
 
     getCandidatesAdmin(): Observable<ICandidate[]> {
-        return this._http.get<ICandidate[]>(environment.apiEndpoint + '/Admin/Candidate')
+        return this._http.get<ICandidate[]>(this._candidateUrl + '/Admin/Candidate')
             .do(data => {})
             .catch(this.handleError);
     }

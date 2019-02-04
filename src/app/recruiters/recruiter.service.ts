@@ -22,7 +22,7 @@ export class RecruiterService {
     }
 
     getRecruitersAdmin(): Observable<IRecruiter[]> {
-        return this._http.get<IRecruiter[]>(environment.apiEndpoint + '/Admin/Recruiter')
+        return this._http.get<IRecruiter[]>(this._reviewUrl + '/Admin/Recruiter')
             .do(data => {})
             .catch(this.handleError);
     }

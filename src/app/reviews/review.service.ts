@@ -25,7 +25,7 @@ export class ReviewService {
     }
 
     getReviewsAdmin(): Observable<IReview[]> {
-        return this._http.get<IReview[]>(environment.apiEndpoint + '/Admin/Review')
+        return this._http.get<IReview[]>(this._reviewUrl + '/Admin/Review')
             .do(data => {})
             .catch(this.handleError);
     }
