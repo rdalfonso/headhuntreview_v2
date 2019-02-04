@@ -41,3 +41,11 @@ jobs:
         key: v1-{{ .Branch }}-{{ epoch }}
         paths:
           - /caches/headhuntreview_v2.tar
+    - deploy:
+        name: Push application Docker image
+        command: |
+          docker login -e $DOCKER_HUB_EMAIL -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PWD
+          docker tag headhuntreview $DOCKER_HUB_USER_ID/headhuntreview:$CIRCLE_SHA1
+          docker tag headhuntreview $DOCKER_HUB_USER_ID/headhuntreview:latest
+          docker push $DOCKER_HUB_USER_ID/headhuntreview:$CIRCLE_SHA1
+          docker push $DOCKER_HUB_USER_ID/headhuntreview:latest

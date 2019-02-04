@@ -13,7 +13,7 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class CompanyService {
-    private _companyUrl = "http://35.222.255.128/api/"; //environment.apiEndpoint;
+    private _companyUrl = "http://35.222.255.128/api"; //environment.apiEndpoint;
     constructor(private _http: HttpClient) { }
 
     searchCompanies(term: string): Observable<ICompany[]> {
