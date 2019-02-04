@@ -12,23 +12,23 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class CandidateService {
-    private _candidateUrl  = "http://35.222.255.128/api/Candidate";
+    private _candidateUrl  = "http://35.222.255.128/api/";
     constructor(private _http: HttpClient) { }
 
     getCandidates(): Observable<ICandidate[]> {
-        return this._http.get<ICandidate[]>(this._candidateUrl)
+        return this._http.get<ICandidate[]>(this._candidateUrl + 'Candidate')
             .do(data => {})
             .catch(this.handleError);
     }
 
     getCandidatesAdmin(): Observable<ICandidate[]> {
-        return this._http.get<ICandidate[]>(this._candidateUrl + '/Admin/Candidate')
+        return this._http.get<ICandidate[]>(this._candidateUrl + 'Admin/Candidate')
             .do(data => {})
             .catch(this.handleError);
     }
 
     getCandidate(id: string): Observable<ICandidate> {
-      return this._http.get<ICandidate[]>(this._candidateUrl + '/' + id)
+      return this._http.get<ICandidate[]>(this._candidateUrl + 'Candidate/' + id)
         .do(data => {})
         .catch(this.handleError);
 
@@ -48,7 +48,7 @@ export class CandidateService {
     }
 
     editCandidate(candidate: any): Observable<any>  {
-      return this._http.put(this._candidateUrl + '/' + candidate.uniqueId, JSON.stringify(candidate), {
+      return this._http.put(this._candidateUrl + 'Candidate/' + candidate.uniqueId, JSON.stringify(candidate), {
         headers: new HttpHeaders().set('Content-Type', 'application/json'),
       })
       .map(this.extractData)

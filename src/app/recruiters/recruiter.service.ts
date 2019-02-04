@@ -12,11 +12,11 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class RecruiterService {
-    private _recruitUrl = 'http://35.222.255.128/api/Recruiter';
+    private _recruitUrl = 'http://35.222.255.128/api';
     constructor(private _http: HttpClient) { }
 
     getRecruiters(): Observable<IRecruiter[]> {
-        return this._http.get<IRecruiter[]>(this._recruitUrl)
+        return this._http.get<IRecruiter[]>(this._recruitUrl + '/Recruiter')
             .do(data => {})
             .catch(this.handleError);
     }
@@ -28,7 +28,7 @@ export class RecruiterService {
     }
 
     getRecruiter(id: string): Observable<IRecruiter> {
-      return this._http.get<IRecruiter[]>(this._recruitUrl + '/' + id)
+      return this._http.get<IRecruiter[]>(this._recruitUrl + '/Recruiter/' + id)
           .do(data => {})
           .catch(this.handleError);
     }
@@ -42,7 +42,7 @@ export class RecruiterService {
     }
 
     editRecruiter(recruiter: any): Observable<any> {
-      return this._http.put(this._recruitUrl + '/' + recruiter.uniqueId, JSON.stringify(recruiter), {
+      return this._http.put(this._recruitUrl + '/Recruiter/' + recruiter.uniqueId, JSON.stringify(recruiter), {
         headers: new HttpHeaders().set('Content-Type', 'application/json'),
       })
       .map(this.extractData)
