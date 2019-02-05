@@ -13,25 +13,25 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class ReviewService {
 
-    private _reviewUrl = 'http://35.222.255.128/api/';
+    private _reviewUrl = environment.apiEndpoint;
     constructor(private _http: HttpClient) {
 
     }
 
     getReviews(): Observable<IReview[]> {
-        return this._http.get<IReview[]>(this._reviewUrl + 'Review')
+        return this._http.get<IReview[]>(this._reviewUrl + '/Review')
             .do(data => {})
             .catch(this.handleError);
     }
 
     getReviewsAdmin(): Observable<IReview[]> {
-        return this._http.get<IReview[]>(this._reviewUrl + 'Admin/Review')
+        return this._http.get<IReview[]>(this._reviewUrl + '/Admin/Review')
             .do(data => {})
             .catch(this.handleError);
     }
 
     getReview(id: string): Observable<IReview> {
-      return this._http.get<IReview[]>(this._reviewUrl + 'Review/' + id)
+      return this._http.get<IReview[]>(this._reviewUrl + '/Review/' + id)
           .do(data => {})
           .catch(this.handleError);
     }
@@ -45,7 +45,7 @@ export class ReviewService {
     }
 
     editReview(review: IReview): Observable<any> {
-      return this._http.put(this._reviewUrl + 'Review/' + review.uniqueId, JSON.stringify(review), {
+      return this._http.put(this._reviewUrl + '/Review/' + review.uniqueId, JSON.stringify(review), {
         headers: new HttpHeaders().set('Content-Type', 'application/json'),
       })
       .map(this.extractData)
