@@ -24,9 +24,9 @@
           You must login to see recruiters.
         </div>
         <div align="center" class="hhr-noitem" *ngIf='IsLoggedin && (!filteredRecruiters || filteredRecruiters.length <= 0)'>
-          There are no recruiters for this filter.
+          There are no recruiters for this filter .
         </div>
-        <div class="container-fluid" *ngIf='filteredRecruiters && filteredRecruiters.length'>
+        <div class="container-fluid" *ngIf='IsLoggedin && (filteredRecruiters && filteredRecruiters.length)'>
           <div class="row hhr-header hidden-xs">
             <div class="col-lg-2"><b>Name</b></div>
             <div class="col-lg-3"><b>Title</b></div>

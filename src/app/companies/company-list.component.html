@@ -18,11 +18,13 @@
               </span>
           </div>
         </div>
-
-        <div align="center" class="hhr-noitem" *ngIf=' (!filteredCompanies || filteredCompanies.length <= 0)'>
+        <div align="center" class="hhr-noitem" *ngIf='!IsLoggedin'>
+          You must login to see companies
+        </div>
+        <div align="center" class="hhr-noitem" *ngIf='IsLoggedin && (!filteredCompanies || filteredCompanies.length <= 0)'>
           There are no recruiting companies for this filter.
         </div>
-        <div class="container" *ngIf='filteredCompanies && filteredCompanies.length'>
+        <div class="container" *ngIf='IsLoggedin && (filteredCompanies && filteredCompanies.length)'>
           <div class="row hhr-header hidden-xs">
             <div class="col-lg-3"><b>Name</b></div>
             <div class="col-lg-1"><b>Website</b></div>

@@ -34,11 +34,12 @@ export class AppComponent implements OnInit {
   }
 
   onHome() {
-    this.router.navigate(['']);
+    console.log('onHome');
+    this.router.navigate(['/']);
   }
 
   logout() {
     this.userSVC.logout();
-    this.router.navigate(['']);
+    this.router.navigate(['/']);
   }
 }
