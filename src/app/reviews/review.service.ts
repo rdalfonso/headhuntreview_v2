@@ -37,7 +37,7 @@ export class ReviewService {
     }
 
     addReview(review: Review): Observable<any> {
-      return this._http.post(this._reviewUrl, JSON.stringify(review), {
+      return this._http.post(this._reviewUrl + '/Review', JSON.stringify(review), {
         headers: new HttpHeaders().set('Content-Type', 'application/json'),
       })
       .map(this.extractData)

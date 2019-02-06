@@ -34,7 +34,7 @@ export class RecruiterService {
     }
 
     addRecruiter(recruiter: Recruiter): Observable<any> {
-      return this._http.post(this._recruitUrl, JSON.stringify(recruiter), {
+      return this._http.post(this._recruitUrl + '/Recruiter', JSON.stringify(recruiter), {
         headers: new HttpHeaders().set('Content-Type', 'application/json'),
       })
       .map(this.extractData)

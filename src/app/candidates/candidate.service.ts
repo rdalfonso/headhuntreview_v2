@@ -40,7 +40,7 @@ export class CandidateService {
     }
 
     addCandidate(candidate: Candidate): Observable<any>  {
-      return this._http.post(this._candidateUrl, JSON.stringify(candidate), {
+      return this._http.post(this._candidateUrl + '/Candidate', JSON.stringify(candidate), {
         headers: new HttpHeaders().set('Content-Type', 'application/json'),
       })
       .map(this.extractData)
