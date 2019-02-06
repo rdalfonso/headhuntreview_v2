@@ -50,7 +50,7 @@ export class RecruiterService {
     }
 
     deleteRecruiter(id: string): Observable<any> {
-      return this._http.delete(this._recruitUrl + '/' + id, {
+      return this._http.delete(this._recruitUrl + '/Recruiter/' + id, {
         headers: new HttpHeaders().set('Content-Type', 'application/json'),
       })
       .map(this.extractData)

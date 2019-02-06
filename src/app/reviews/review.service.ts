@@ -53,7 +53,7 @@ export class ReviewService {
     }
 
     deleteReview(id: string): Observable<any> {
-      return this._http.delete(this._reviewUrl + '/' + id, {
+      return this._http.delete(this._reviewUrl + '/Review/' + id, {
         headers: new HttpHeaders().set('Content-Type', 'application/json'),
       })
       .map(this.extractData)

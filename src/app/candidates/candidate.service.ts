@@ -56,7 +56,7 @@ export class CandidateService {
     }
 
     deleteCandidate(id: string): Observable<any> {
-      return this._http.delete(this._candidateUrl + '/' + id, {
+      return this._http.delete(this._candidateUrl + '/Candidate/' + id, {
         headers: new HttpHeaders().set('Content-Type', 'application/json'),
       })
       .map(this.extractData)
