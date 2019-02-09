@@ -51,7 +51,6 @@ export class SignUpComponent {
       }
 
     submitForm(form: NgForm)  {
-      console.log('this.model', this.model)
       if (this.model.password1 !== this.model.password2) {
         this.passwordFail = true;
       } else {

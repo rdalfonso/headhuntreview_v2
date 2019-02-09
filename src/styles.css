@@ -87,6 +87,12 @@ h3 {
   width: 95%;
 }
 
+.li_link {
+  height: 2rem;
+  width:2rem;
+  fill:  var(--color-blue-generic);
+}
+
 input[type=email], input[type=text], input[type=search] {
     padding:5px;
     border:2px solid #ccc;

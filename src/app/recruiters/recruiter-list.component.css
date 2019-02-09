@@ -1,2 +1,8 @@
 .recruiter-name .name { float:left }
 .recruiter-name .icon { float:right }
+
+.li_link {
+  height: 2rem;
+  width:2rem;
+  fill:  var(--color-blue-generic);
+}

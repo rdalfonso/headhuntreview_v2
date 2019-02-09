@@ -33,8 +33,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  onHome() {
-    console.log('onHome');
+  onHome(): void {
     this.router.navigate(['/']);
   }
 

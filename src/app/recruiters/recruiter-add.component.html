@@ -55,7 +55,9 @@
               name="linkedin"
               placeholder="LinkedIn Profile Url"
               [(ngModel)]="model.linkedin">
-             <img src="./assets/images/square-linkedin.png" width="30" height="30"/>
+             <svg class="li_icon">
+                <use xlink:href="./assets/images/sprite.svg#icon-linkedin"></use>
+              </svg>
           </td>
         </tr>
         <tr class="form-group" [class.has-error]="email.invalid && email.touched">

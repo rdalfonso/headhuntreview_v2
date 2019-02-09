@@ -10,6 +10,17 @@ input[type=email] {
     width: 300px;
 }
 
+@media only screen and (max-width: 600px) {
+  input[type=email] {
+    padding:5px;
+    border:2px solid #ccc;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom: 2rem;
+    width: 300px;
+  }
+}
+
 input[type=email]:focus {
     border-color:#333;
 }
@@ -22,6 +33,17 @@ input[type=text] {
     width: 300px;
 }
 
+@media only screen and (max-width: 600px) {
+  input[type=text] {
+    padding:5px;
+    border:2px solid #ccc;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    width: 300px;
+    margin-bottom: 2rem;
+  }
+}
+
 input[type=text]:focus {
     border-color:#333;
 }
@@ -32,6 +54,17 @@ input[type=password] {
     -webkit-border-radius: 5px;
     border-radius: 5px;
     width: 300px;
+}
+
+@media only screen and (max-width: 600px) {
+  input[type=password] {
+      padding:5px;
+      border:2px solid #ccc;
+      -webkit-border-radius: 5px;
+      border-radius: 5px;
+      width: 300px;
+      margin-bottom: 2rem;
+  }
 }
 
 input[type=password]:focus {
@@ -49,4 +82,11 @@ input[type=password]:focus {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+
+.li_icon {
+  height: 2rem;
+  width:2rem;
+  fill:  var(--color-blue-generic);
 }
