@@ -73,7 +73,9 @@
               <div class="col-lg-2">{{ recruiter.email }}</div>
               <div class="col-lg-1">
                 <a href="{{ recruiter.linkedIn }}" target="_blank">
-                  <img src="./assets/images/square-linkedin.png" width="30" height="30"/>
+                  <svg class="li_link">
+                     <use xlink:href="./assets/images/sprite.svg#icon-linkedin"></use>
+                   </svg>
                 </a>
               </div>
               <div class="col-lg-1">{{ recruiter.reviews.length }}</div>

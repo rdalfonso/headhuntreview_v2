@@ -18,3 +18,9 @@ input[type=search] {
 input[type=search]:focus {
     border-color:#333;
 }
+
+.li_icon {
+  height: 2rem;
+  width:2rem;
+  fill:  var(--color-blue-generic);
+}
