@@ -44,9 +44,10 @@ jobs:
       - run:
           name: Docker build and push
           command: |
+            docker build -t ${PROJECT_NAME} .
             docker login -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PW
-            docker tag headhuntreview_v2 "${PROJECT_NAME}:${CIRCLE_SHA1}"
-            docker tag headhuntreview_v2 "${PROJECT_NAME}:latest"
+            docker tag ${PROJECT_NAME} "${PROJECT_NAME}:${CIRCLE_SHA1}"
+            docker tag ${PROJECT_NAME} "${PROJECT_NAME}:latest"
             docker push "${PROJECT_NAME}:${CIRCLE_SHA1}"
             docker push "${PROJECT_NAME}:latest"
       - run:
