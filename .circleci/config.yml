@@ -50,10 +50,6 @@ jobs:
             docker tag ${PROJECT_NAME} "${PROJECT_NAME}:latest"
             docker push "${PROJECT_NAME}:${CIRCLE_SHA1}"
             docker push "${PROJECT_NAME}:latest"
-      - run:
-          name: Deploy to Kubernetes
-          command: |
-            kubectl set image deployment/site site=${PROJECT_NAME}:${CIRCLE_SHA1}
 
 workflows:
   version: 2
