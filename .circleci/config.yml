@@ -72,6 +72,6 @@ jobs:
           docker push "${PROJECT_NAME}:${CIRCLE_SHA1}"
           docker push "${PROJECT_NAME}:latest"
     - run:
-        name: Deploy to Kubernetes
+        name: Test Kubernetes
         command: |
-          kubectl set image deployment/site site=${PROJECT_NAME}:${CIRCLE_SHA1}
+          kubectl get services
