@@ -53,7 +53,8 @@ jobs:
       - run:
           name: Deploy to Kubernetes
           command: |
-            kubectl get services
+            kubectl set image deployment/site site=${PROJECT_NAME}:${CIRCLE_SHA1}
+
 workflows:
   version: 2
   build_test_deploy:
