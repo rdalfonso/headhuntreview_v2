@@ -1,42 +1,28 @@
 version: 2
 jobs:
-  build:
-    working_directory: /app
+  build_and_test:
     docker:
-      - image: docker:17.05.0-ce-git
-    environment:
-      - PROJECT_NAME: "feltonvillain/headhuntreview"
-      - GOOGLE_PROJECT_ID: "headhunterreviews-ffb31"
-      - GOOGLE_COMPUTE_ZONE: "us-central1-a"
-      - GOOGLE_CLUSTER_NAME: "headhuntreviews-cluster"
+      - image: circleci/node:10
+    working_directory: /app
     steps:
     - checkout
-    - run:
-        name: Setup Google Cloud SDK
-        command: |
-          echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
-          gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
-          gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-          gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-          gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
-    - setup_remote_docker
-    - run:
-        name: Install dependencies
-        command: |
-          apk update
-          apk add --no-cache \
-            curl curl-dev bash
-          apk add --no-cache \
-            py-pip=9.0.0-r1
-          pip install \
-            docker-compose==1.12.0 \
-            awscli==1.11.76 \
-            gcloud
     - restore_cache:
         keys:
           - v1-{{ .Branch }}
         paths:
           - /caches/headhuntreview_v2.tar
+    - run:
+        name: Install dependencies
+          command: |
+            apk update
+            apk add --no-cache \
+              curl curl-dev bash
+            apk add --no-cache \
+              py-pip=9.0.0-r1
+            pip install \
+              docker-compose==1.12.0 \
+              awscli==1.11.76 \
+              gcloud
     - run:
         name: Load Docker image layer cache
         command: |
@@ -55,23 +41,45 @@ jobs:
         key: v1-{{ .Branch }}-{{ epoch }}
         paths:
           - /caches/headhuntreview_v2.tar
-    - run:
-        name: Install Docker client
-        command: |
-          set -x
-          VER="17.06.0-ce"
-          curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
-          tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-          mv /tmp/docker/* /usr/bin
-    - run:
-        name: Docker build and push
-        command: |
-          docker login -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PW
-          docker tag headhuntreview_v2 "${PROJECT_NAME}:${CIRCLE_SHA1}"
-          docker tag headhuntreview_v2 "${PROJECT_NAME}:latest"
-          docker push "${PROJECT_NAME}:${CIRCLE_SHA1}"
-          docker push "${PROJECT_NAME}:latest"
-    - run:
-        name: Test Kubernetes
-        command: |
-          kubectl get services
+deploy_to_staging:
+    docker:
+      - image: google/cloud-sdk
+    environment:
+      - PROJECT_NAME: "feltonvillain/headhuntreview"
+      - GOOGLE_PROJECT_ID: "headhunterreviews-ffb31"
+      - GOOGLE_COMPUTE_ZONE: "us-central1-a"
+      - GOOGLE_CLUSTER_NAME: "headhuntreviews-cluster"
+    steps:
+      - checkout
+      - run:
+          name: Setup Google Cloud SDK
+          command: |
+            echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+            gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+            gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+            gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+            gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
+      - setup_remote_docker
+      - run:
+          name: Docker build and push
+          command: |
+            docker login -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PW
+            docker tag headhuntreview_v2 "${PROJECT_NAME}:${CIRCLE_SHA1}"
+            docker tag headhuntreview_v2 "${PROJECT_NAME}:latest"
+            docker push "${PROJECT_NAME}:${CIRCLE_SHA1}"
+            docker push "${PROJECT_NAME}:latest"
+      - run:
+          name: Deploy to Kubernetes
+          command: |
+            kubectl get services
+workflows:
+  version: 2
+  build_test_deploy:
+    jobs:
+      - build_and_test
+      - deploy_to_staging:
+          requires:
+            - build_and_test
+          filters:
+            branches:
+              only: master
