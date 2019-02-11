@@ -41,6 +41,21 @@ jobs:
         key: v1-{{ .Branch }}-{{ epoch }}
         paths:
           - /caches/headhuntreview_v2.tar
-    - run:
-        name: Run tests
-        command: npm test
+deploy_to_staging:
+    docker:
+      - image: google/cloud-sdk
+    environment:
+      - PROJECT_NAME: "feltonvillain/headhuntreview"
+      - GOOGLE_PROJECT_ID: "headhunterreviews-ffb31"
+      - GOOGLE_COMPUTE_ZONE: "us-central1-a"
+      - GOOGLE_CLUSTER_NAME: "headhuntreviews-cluster"
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Docker build and push
+          command: |
+            docker build -t ${PROJECT_NAME} .
+            docker tag ${PROJECT_NAME}:${CIRCLE_SHA1}
+            docker login -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PW
+            docker push ${PROJECT_NAME}:${CIRCLE_SHA1}
