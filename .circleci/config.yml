@@ -41,3 +41,6 @@ jobs:
         key: v1-{{ .Branch }}-{{ epoch }}
         paths:
           - /caches/headhuntreview_v2.tar
+    - run:
+        name: Run tests
+        command: npm test
