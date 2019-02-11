@@ -11,6 +11,15 @@ jobs:
       - GOOGLE_CLUSTER_NAME: "headhuntreviews-cluster"
     steps:
     - checkout
+    - run:
+        name: Setup Google Cloud SDK
+        command: |
+          apt-get install -qq -y gettext
+          echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+          gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+          gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+          gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+          gcloud --quiet container clusters get-credentials ${GOOGLE_CLUSTER_NAME}
     - setup_remote_docker
     - run:
         name: Install dependencies
@@ -62,3 +71,7 @@ jobs:
           docker tag headhuntreview_v2 "${PROJECT_NAME}:latest"
           docker push "${PROJECT_NAME}:${CIRCLE_SHA1}"
           docker push "${PROJECT_NAME}:latest"
+    - run:
+        name: Deploy to Kubernetes
+        command: |
+          kubectl set image deployment/site site=${PROJECT_NAME}:${CIRCLE_SHA1}
