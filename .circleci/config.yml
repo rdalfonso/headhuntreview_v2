@@ -7,10 +7,10 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-        keys:
-          - v1-{{ .Branch }}
-        paths:
-          - /caches/headhuntreview_v2.tar
+          keys:
+            - v1-{{ .Branch }}
+          paths:
+            - /caches/headhuntreview_v2.tar
       - run:
           name: Load Docker image layer cache
           command: |
