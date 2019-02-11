@@ -59,4 +59,6 @@ jobs:
         command: |
           docker login -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PW
           docker tag headhuntreview_v2 "${PROJECT_NAME}:${CIRCLE_SHA1}"
+          docker tag headhuntreview_v2 "${PROJECT_NAME}:latest"
           docker push "${PROJECT_NAME}:${CIRCLE_SHA1}"
+          docker push "${PROJECT_NAME}:latest"
