@@ -10,7 +10,7 @@
           </div>
         </div>
         <div align="center" class="hhr-noitem" *ngIf='!IsLoggedin'>
-          You must login to see reviews.
+          You must <a href="/admin/login"><b>login to your account</b></a> to see reviews.
         </div>
         <div class="container" *ngIf='IsLoggedin && (filteredReviews && filteredReviews.length)'>
           <div class="row hhr-header hidden-xs">

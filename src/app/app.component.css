@@ -20,6 +20,15 @@
 }
 
 
+@media screen and (max-width: 767px) {
+  h2 {
+    font-size: 2.4rem;
+  }
+}
+
+.footer-buttons {
+  text-align: center;
+}
 
 .header {
   text-align: center;
@@ -30,12 +39,22 @@
   left:7%;
 }
 
+
+
 .signbar {
   align-self: center;
   padding-top: 20px;
   padding-bottom: 10px;
   right:10%;
 }
+
+@media only screen and (max-width: 600px) {
+  .signbar {
+    text-align: center;
+    right:0%;
+  }
+}
+
 
 .footer {
   text-align: center;
@@ -47,11 +66,11 @@
 }
 
 .hidden-xs-inline {
-    display: inline-block !important;
+ display: inline-block !important;
 }
 
 img {
-  padding: 5px;
+ padding: 5px;
 }
 
 /* Extra small devices (phones, up to 480px) */

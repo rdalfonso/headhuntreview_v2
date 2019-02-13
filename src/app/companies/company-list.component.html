@@ -19,7 +19,7 @@
           </div>
         </div>
         <div align="center" class="hhr-noitem" *ngIf='!IsLoggedin'>
-          You must login to see companies
+          You must <a href="/admin/login"><b>login to your account</b></a> to see companies
         </div>
         <div align="center" class="hhr-noitem" *ngIf='IsLoggedin && (!filteredCompanies || filteredCompanies.length <= 0)'>
           There are no recruiting companies for this filter.

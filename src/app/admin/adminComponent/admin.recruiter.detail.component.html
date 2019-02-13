@@ -28,7 +28,11 @@
                     <div class="col-md-6">{{ recruiter.email }}</div>
                   </div>
                   <div class="row hhr-item">
-                    <div class="col-md-2"><img src="./assets/images/square-linkedin.png" width="20" height="20"/></div>
+                    <div class="col-md-2">
+                      <svg class="li_link">
+                        <use xlink:href="./assets/images/sprite.svg#icon-linkedin"></use>
+                       </svg>
+                    </div>
                     <div class="col-md-6"><a href="{{ recruiter.linkedIn }}" target="_blank">{{ recruiter.linkedIn }}</a></div>
                   </div>
               </div>
