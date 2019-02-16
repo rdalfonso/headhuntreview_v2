@@ -1,10 +1,35 @@
-thead {
-    color: #337AB7;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 62.5%;
+  font-weight: 500;
+  font-family: 'Lato', sans-serif !important;
+  color: black;
+  width: 100%;
+  overflow: auto;
 }
 
 #map {
   height: 200px;
   width: 200px;
+}
+
+thead {
+    color: #337AB7;
 }
 
 .panel-heading-admin {

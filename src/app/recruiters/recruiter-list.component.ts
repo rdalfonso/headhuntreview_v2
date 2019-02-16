@@ -30,7 +30,8 @@ export class RecruiterListComponent implements OnInit {
     }
     set listFilter(value: string) {
         this._listFilter = value;
-        this.filteredRecruiters = this.listFilter ? this.performFilter(this.listFilter) : this.recruiters;
+        this.filteredRecruiters =
+        this.listFilter ? this.performFilter(this.listFilter) : this.recruiters;
     }
 
     constructor(
