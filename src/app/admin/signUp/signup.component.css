@@ -84,6 +84,15 @@ input[type=password]:focus {
   margin-right: auto;
 }
 
+.signup-benefit-header {
+  border-bottom: 2px solid #5bc0de;
+}
+
+.signup-benefits {
+  padding-top: 10px;
+  font-size: 1.8rem;
+}
+
 
 .li_icon {
   height: 2rem;

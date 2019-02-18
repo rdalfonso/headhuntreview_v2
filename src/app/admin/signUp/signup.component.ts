@@ -18,37 +18,10 @@ export class SignUpComponent {
     password2: string;
     passwordFail = false;
     model = new Signup('', '', '', '', '', '', '', false);
-    radioSel:any;
-    radioSelected:string;
-    radioSelectedString:string;
-    itemsList: Item[] = [
-      {
-        name:'I am a Candidate ',
-        value:'candidate'
-      },
-      {
-        name:'I am a Recruiter',
-        value:'recruiter'
-      },
-    ];
-
     constructor(
       private userSVC: UserService,
       private router: Router) {
-
-        this.radioSelected = "candidate";
-        this.getSelecteditem();
     }
-
-    // Get row item from array
-      getSelecteditem(){
-        this.radioSel = this.itemsList.find(Item => Item.value === this.radioSelected);
-        this.radioSelectedString = JSON.stringify(this.radioSel);
-      }
-      // Radio Change Event
-      onItemChange(item){
-        this.getSelecteditem();
-      }
 
     submitForm(form: NgForm)  {
       if (this.model.password1 !== this.model.password2) {
