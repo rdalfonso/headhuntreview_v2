@@ -42,7 +42,10 @@ export class RecruiterListComponent implements OnInit {
 
     ngOnInit(): void {
         this.IsLoggedin = this._userService.verifyAuth();
-        this.seeAll();
+        if(this.IsLoggedin) {
+          this.seeAll();
+        }
+
     }
 
     seeAll(): void {

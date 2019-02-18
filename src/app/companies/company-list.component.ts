@@ -38,8 +38,10 @@ export class CompanyListComponent implements OnInit {
     private _router: Router) { }
 
   ngOnInit() {
-    this.seeAll();
     this.IsLoggedin = this._userService.verifyAuth();
+    if(this.IsLoggedin) {
+      this.seeAll();
+    }
   }
 
   seeAll(): void {
