@@ -27,3 +27,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
       - [x] Src directory for javascript components, routers, services, and SASS styles.
       - [x] Configuration files for webpack, babelrc, package.json, gitignore, and more.
       - [x] Styling application with SASS 7-1 folder structure pattern.
+      
+### Notes
+  - API is .NET Core WebAPI hosted on Google Kubernetes Engine
+  - Signup and Login Authentication done via Google Firebase using firebase NPM package.
+  - Live version of this application is http://headhuntreview.com/welcome 
