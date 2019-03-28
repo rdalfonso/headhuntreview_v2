@@ -19,7 +19,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
   ng serve
   
   Once running NG Development server http://localhost:4200, 
-  Signup or login with credentials: **rdalfonso@gmail.com / bbbbbb** 
+  Signup or login with credentials: rdalfonso@gmail.com / bbbbbb
   ```
 
 ### Overview
