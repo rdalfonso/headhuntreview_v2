@@ -13,7 +13,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ### Installation
   To install this application do the following:
   ```
-  git clone https://github.com/rdalfonso/headhuntapp-react.git
+  git clone https://github.com/rdalfonso/headhuntreview_v2.git
   npm install
   ng build --prod
   ng serve
