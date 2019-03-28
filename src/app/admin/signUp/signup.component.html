@@ -14,7 +14,7 @@
               </div>
               <div class="col-lg-5">
                   <input maxlength="50" #name="ngModel" type="text" name="name" placeholder="Name" [(ngModel)]="model.name" required>
-                  <span *ngIf="name.invalid && name.touched" class="alert alert-danger">Name is required.</span>
+                  <span *ngIf="name.invalid && name.touched" class="red">* required.</span>
               </div>
             </div>
             <div class="row signup-item">
@@ -23,7 +23,7 @@
               </div>
               <div class="col-lg-5">
                   <input maxlength="50" #title="ngModel" type="text" name="title" placeholder="ex, Full Stack Engineer" [(ngModel)]="model.title" required>
-                  <span *ngIf="title.invalid && title.touched" class="alert alert-danger">Job Title is required.</span>
+                  <span *ngIf="title.invalid && title.touched" class="red">Job Title is required.</span>
               </div>
             </div>
             <div class="row signup-item">
@@ -36,7 +36,7 @@
               </div>
               <div class="col-lg-5">
                   <input maxlength="50" #linkedin="ngModel" type="text" name="linkedin" placeholder="Linkedin Profile Url" [(ngModel)]="model.linkedin" required>
-                  <span *ngIf="linkedin.invalid && linkedin.touched" class="alert alert-danger">Linkedin Url is required.</span>
+                  <span *ngIf="linkedin.invalid && linkedin.touched" class="red">Linkedin Url is required.</span>
               </div>
             </div>
 
@@ -54,7 +54,7 @@
                     [(ngModel)]="model.email"
                     pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                     required>
-                  <span *ngIf="email.invalid && email.touched" class="alert alert-danger">Valid Email is required.</span>
+                  <span *ngIf="email.invalid && email.touched" class="red">Valid Email is required.</span>
               </div>
             </div>
             <div class="row signup-item">
@@ -65,7 +65,7 @@
                   <input maxlength="10" #password1="ngModel" type="password" name="password1"
                     placeholder="Enter Password"
                     [(ngModel)]="model.password1" required>
-                    <span *ngIf="password1.invalid && password1.touched" class="alert alert-danger">Password is required.</span>
+                    <span *ngIf="password1.invalid && password1.touched" class="red">Password is required.</span>
                 </div>
             </div>
             <div class="row signup-item">
@@ -76,7 +76,7 @@
                  <input maxlength="10" #password2="ngModel" type="password" name="password2"
                     placeholder="Confirm Password"
                     [(ngModel)]="model.password2" required>
-                    <span *ngIf="password2.invalid && password2.touched" class="alert alert-danger">Password Confirm is required.</span>
+                    <span *ngIf="password2.invalid && password2.touched" class="red">Password Confirm is required.</span>
                     <span *ngIf="passwordFail" class="alert alert-danger">Password Do Not Match.</span>
                 </div>
             </div>

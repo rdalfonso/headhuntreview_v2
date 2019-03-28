@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  apiEndpoint: 'http://localhost:4200/api/',
+  apiEndpoint: 'http://35.222.255.128/api',
   apiMapUrl: 'https://www.google.com/maps/embed/v1/place?key=',
   apiMapKey: 'AIzaSyDNubxaoKzoVZ554NYuPJ4kDGEZWaRx1Tw',
   firebase: {

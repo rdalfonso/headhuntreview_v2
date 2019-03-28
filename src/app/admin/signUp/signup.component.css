@@ -99,3 +99,7 @@ input[type=password]:focus {
   width:2rem;
   fill:  var(--color-blue-generic);
 }
+
+.red {
+  color:red;
+}
