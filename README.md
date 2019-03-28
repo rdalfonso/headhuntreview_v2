@@ -24,7 +24,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ### Overview
     Angular-cli version of headhuntreview.com.
-    - **Breakdown of application structure**
       - [x] Public directory for serving the application index.html, images, and dist/ output.
       - [x] Server directory to launch express server.
       - [x] Src directory for javascript components, routers, services, and SASS styles.
